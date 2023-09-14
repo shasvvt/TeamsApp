@@ -1,0 +1,85 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "$data": "${$root.places}",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "60px",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "${image}"
+                        }
+                    ],
+                    "spacing": "None",
+                    "minHeight": "60px"
+                },
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${title}",
+                            "size": "Medium",
+                            "style": "heading",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${days}",
+                            "wrap": true,
+                            "size": "Small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${description}",
+                            "wrap": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "ActionSet",
+                            "actions": [
+                                {
+                                    "type": "Action.OpenUrl",
+                                    "title": "See countries you can visit",
+                                    "url": "https://teams.microsoft.com/l/entity/3fcc1ef1-0019-45f5-9e7e-ad930e72c241/index0?tenantId=https://teams.microsoft.com/l/team/19%3a6C3Dymk8PrSFuleVhEy9JN3QEDTFndzxT9yg1HsDUtM1%40thread.tacv2/conversations?groupId=7036dbb1-32c6-40fe-9f3d-ce3bf2925369&tenantId=b36ca2ac-51bf-4c27-919a-fdd70e51e9e0&webUrl=https://salmon-desert-08fd2c700.3.azurestaticapps.net/&openInMeeting=false"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "ActionSet",
+                            "actions": [
+                                {
+                                    "type": "Action.OpenUrl",
+                                    "title": "Create a card"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
