@@ -72,8 +72,14 @@
                             "type": "ActionSet",
                             "actions": [
                                 {
-                                    "type": "Action.OpenUrl",
-                                    "title": "Create a card"
+                                    "type": "Action.Submit",
+                                    "title": "Open Modal",
+                                    "data":{
+                                        "msteams": {
+                                            "type": "task/fetch"
+                                        },
+                                        "data": "test"
+                                    }
                                 }
                             ]
                         }
