@@ -84,6 +84,20 @@ deploy:
   - uses: cli/runNpmCommand
     with:
       args: install --production
+  # SPFx webpart deployment
+  - uses: cli/runNpxCommand
+    with:
+      workingDirectory: src
+      args: gulp bundle --ship --no-color
+  - uses: cli/runNpxCommand
+    with:
+      workingDirectory: src
+      args: gulp package-solution --ship --no-color
+  - uses: spfx/deploy
+    with:
+      createAppCatalogIfNotExist: false
+      packageSolutionPath: ./src/config/package-solution.json
+
   # Deploy your application to Azure App Service using the zip deploy feature.
   # For additional details, refer to https://aka.ms/zip-deploy-to-app-services.
   - uses: azureAppService/zipDeploy

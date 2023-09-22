@@ -10,6 +10,7 @@
                 "Validate prerequisites",
                 "Start local tunnel",
                 "Provision",
+                "gulp serve",
                 "Deploy",
                 "Start application"
             ],
@@ -29,7 +30,8 @@
                 ],
                 "portOccupancy": [
                     3978, // app service port
-                    9239 // app inspector port for Node.js debugger
+                    9239, // app inspector port for Node.js debugger
+                    4321  // SPFx service port
                 ]
             }
         },
@@ -78,6 +80,51 @@
             }
         },
         {
+            "label": "gulp trust-dev-cert",
+            "type": "process",
+            "command": "node",
+            "args": [
+                "${workspaceFolder}/src/node_modules/gulp/bin/gulp.js",
+                "trust-dev-cert"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": "Deploy"
+        },
+        {
+            "label": "gulp serve",
+            "type": "process",
+            "command": "node",
+            "args": [
+                "${workspaceFolder}/src/node_modules/gulp/bin/gulp.js",
+                "serve",
+                "--nobrowser"
+            ],
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": ".",
+                            "file": 1,
+                            "location": 2,
+                            "message": 3
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*Starting gulp.*",
+                        "endsPattern": "^.*Finished subtask 'reload'.*"
+                    }
+                }
+            ],
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": "gulp trust-dev-cert"
+        },
+        {
             "label": "Start application",
             "type": "shell",
             "command": "npm run dev:teamsfx",
@@ -100,6 +147,20 @@
                     "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
                 }
             }
+        },
+        {
+            "label": "Terminate All Tasks",
+            "command": "echo ${input:terminate}",
+            "type": "shell",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "terminate",
+            "type": "command",
+            "command": "workbench.action.tasks.terminate",
+            "args": "terminateAll"
         }
     ]
 }
